@@ -1,0 +1,63 @@
+<style>
+    .container{
+        max-width: 1440px;
+        margin: auto;
+    }
+    .title{
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+    }
+    .product-container{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 20px;
+
+    }
+
+</style>
+
+<div class="container">
+    <h1 class="title">{{  section.settings.text }}</h1>
+    <div class="product-container">
+        {% for product in  section.settings.featured_collection.products limit: section.settings.range  %}
+              {% render 'product-card', product: product %}  
+        {% endfor %}
+    </div>
+   
+</div> 
+
+{% schema %}
+{
+    "name": "featured-products",
+    "settings": 
+    [
+            {
+                "type": "inline_richtext",
+                "id":"text",
+                "label":"Headline",
+                "default": "Featured Collection"
+            },
+            {
+                "type": "collection",
+                "id": "featured_collection",
+                "label": "Collection"
+            },
+            {
+                "type": "range",
+                "id": "range",
+                "min": 4,
+                "max": 12,
+                "step": 1,
+                "label": "Number of products in Featured Collection",
+                "default": 4
+                
+            }
+        ],
+        "presets": [
+            {
+                "name": "featured-products"
+            }
+        ]
+}
+{% endschema %}

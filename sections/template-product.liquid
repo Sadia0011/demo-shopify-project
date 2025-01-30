@@ -1,0 +1,36 @@
+
+
+<style>
+.product-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+}
+.product-description{
+     
+}
+.title{
+
+}
+.media{
+    height: 100px;
+    overflow: hidden;
+    padding: 2px;
+}
+</style>
+
+
+
+<div class="product-container">
+    <div>
+        {% for media in product.media %}
+            <div class="">
+                {% render 'product-media', media: media %}
+            </div>
+        {% endfor %}
+    </div>
+    {% comment %} <div class="product-description">
+        <h1 class="title">{{ product.title }}</h1>
+    </div> {% endcomment %}
+</div>

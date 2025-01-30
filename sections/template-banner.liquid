@@ -1,0 +1,171 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<style>
+        .slider-image {
+        display: block;
+        width: 100%;
+        object-fit: cover;
+        }
+        .slide-hero::before{
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #0000004d;
+            z-index: 10;
+        }
+        .banner-description {
+            text-align: center;
+            color: #ffffff;
+            position: absolute;
+            top: 50%;
+            right: 34%;
+        }
+        .banner-text{
+            font-size: 40px;
+            font-weight: bolder;
+           
+        }
+        .banner-button {
+                background-color: #a60e0e;
+                border-radius: 8px;
+                padding: 13px;
+                color: white;
+                font-size: 18px;
+                text-decoration: none;
+                font-weight: bold;
+        }
+        @media (min-width: 768px) {
+                .swiper {
+                    height: 600px;
+                }
+}
+</style>
+
+<div class="swiper  max-h-screen">
+  
+  <div class="swiper-wrapper">
+    
+    <div class="swiper-slide slide-hero"
+    style=" 
+     background-image: url({% if section.settings.img %}'{{ section.settings.img | img_url: 'large' }}'{% else %}'{{ 'image' | placeholder_svg_tag: 'w-20' }}'{% endif %});
+     background-size: cover; 
+     background-position: center; 
+     background-repeat: no-repeat;">
+        <div class="banner-description">
+            <h2 class="banner-text">{{ section.settings.text }}</h2>
+            {% if  section.settings.button  %}
+                <a class="banner-button" href="{{ routes.all_products_collection_url }}" >Continue Shopping</a>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="swiper-slide slide-hero"
+    style=" 
+     background-image: url({% if section.settings.img2 %}'{{ section.settings.img2 | img_url: 'large' }}'{% else %}'{{ 'image' | placeholder_svg_tag: 'w-20' }}'{% endif %});
+     background-size: cover; 
+     background-position: center; 
+     background-repeat: no-repeat;">
+        <div class="banner-description">
+            <h2 class="banner-text">{{ section.settings.text2 }}</h2>
+            {% if  section.settings.button  %}
+                <a class="banner-button" href="{{ routes.all_products_collection_url }}" >Continue Shopping</a>
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="swiper-slide slide-hero"
+    style=" 
+     background-image: url({% if section.settings.img3 %}'{{ section.settings.img3 | img_url: 'large' }}'{% else %}'{{ 'image' | placeholder_svg_tag: 'w-20' }}'{% endif %});
+     background-size: cover; 
+     background-position: center; 
+     background-repeat: no-repeat;">
+        <div class="banner-description">
+            <h2 class="banner-text">{{ section.settings.text3 }}</h2>
+            {% if  section.settings.button  %}
+                <a class="banner-button" href="{{ routes.all_products_collection_url }}" >Continue Shopping</a>
+            {% endif %}
+        </div>
+
+    </div>
+   
+  </div>
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></
+  <div class="swiper-scrollbar"></div>
+</div>
+
+<script>
+    const swiper = new Swiper('.swiper', {
+
+  direction: 'horizontal',
+  loop: true,
+
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});
+</script>
+
+{% schema %}
+{
+    "name": "Banner",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id":"img",
+            "label": "Image"
+        },
+        {
+            "type": "inline_richtext",
+            "id":"text",
+            "label":"Headline",
+            "default": "Welcome to our shop"
+        },
+        {
+            "type": "image_picker",
+            "id":"img2",
+            "label": "Second Image"
+        },
+        {
+            "type": "inline_richtext",
+            "id":"text2",
+            "label":"Second Headline",
+            "default": "Welcome to our shop"
+        },
+        {
+            "type": "image_picker",
+            "id":"img3",
+            "label": "Third Image"
+        },
+        {
+            "type": "inline_richtext",
+            "id":"text3",
+            "label":"Third Headline",
+            "default": "Welcome to our shop"
+        },
+        {
+            "type": "checkbox",
+            "id":"button",
+            "label":"Button",
+            "default": true
+        }
+        ],
+        "presets": [
+            {
+                "name": "Banner"
+            }
+        ]
+}
+{% endschema %}

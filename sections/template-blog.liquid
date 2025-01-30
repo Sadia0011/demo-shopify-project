@@ -1,0 +1,125 @@
+<style>
+    .Blog-Container{
+       max-width: 1440px;
+       margin: auto;
+    }
+    .blog-title{
+       text-align: center;
+       font-size: 36px;
+       font-weight: bold;
+    }
+    .article-Container{
+       display: grid;
+       grid-template-columns: repeat(3,1fr);
+       gap: 20px;
+    }
+    .article{
+      background-color: rgb(192, 205, 216);
+      border-radius: 16px;
+      padding: 5px;
+      position: relative;
+    }
+    .article-image{
+        border-radius: 16px;
+        width: 100%;
+        height: 70%;
+        border: black;
+ 
+    }
+    .article-description{
+      padding: 10px;
+      position: absolute;
+      bottom: 0;
+    }
+    .article-title{
+        font-size: 24px;
+    }
+    .article-link{
+        font-weight: bolder;
+    }
+    .pagination{
+        max-width: max-content;
+        margin: auto;
+        color: black !important;
+        margin-bottom: 10px;
+        margin-top: 30px;
+    }
+    .page{
+        background-color: #9b9b99;
+        padding: 5px;
+    }
+    .current{
+          background-color: blue; 
+          color: white;
+    }
+</style>
+
+<div class="Blog-Container">
+    <h1 class="blog-title">{{ section.settings.text }}</h1>
+    
+    {% paginate blog.articles by section.settings.number_of_blog_posts %}
+        <div class="article-Container">
+           {% for article in blog.articles %}
+                <div class="article">
+                    {% if section.settings.article_image %}
+                        {% if article.image !=blank %}
+                            <img class="article-image" src="{{ article.image |  img_url: "medium"  }}" alt="{{ article.image.alt }}">
+                            {% else %}
+                                {{ 'image'|  placeholder_svg_tag }}
+                        {% endif %}
+                       {% endif %}
+                    <div class="article-description">
+                        <h1 class="article-title">{{ article.title }}</h1>
+            
+                        {% if article.excerpt.size > 0 %}
+                            {% else %}
+                               {% if section.settings.article_content %}
+                                <p>{{ article.content | strip_html | truncatewords: 15}}</p>
+                               {% endif %}
+                        {% endif %}
+                        <a class="article-link" href="{{ article.url }}">Read more..</a>
+          
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            {{ paginate | default_pagination}}
+            </div>
+        {% endpaginate %}
+   
+</div>
+
+
+{% schema %}
+    {
+        "name": "Blog",
+        "settings": [
+            {
+                "type": "inline_richtext",
+                "id":"text",
+                "label":"Headline",
+                "default": "Blog"
+            },
+            {
+                "type": "range",
+                "id": "number_of_blog_posts",
+                "label": "Number Of Blog Posts",
+                "step": 1,
+                "min": 1,
+                "max": 6,
+                "default": 3
+            },{
+                "type": "checkbox",
+                "id": "article_content",
+                "label": "Content of the Article",
+                "default": true
+            },{
+                "type": "checkbox",
+                "id": "article_image",
+                "label": "Image",
+                "default": true
+            }
+            ]
+    }
+    {% endschema %}

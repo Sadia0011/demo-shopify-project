@@ -1,0 +1,255 @@
+<style>
+    .container{
+        max-width: 1440px;
+        margin: auto;
+    }
+    .article{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+    .title{
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+        margin: 0;
+    }
+    .article-image{
+        width: 100%;
+    }
+    .blog-title{
+        text-decoration: none;
+        color: black;
+        text-align: start;
+    }
+    .comment-container{
+        flex: 1;
+        margin: auto;
+        align-items: center;
+        justify-items: center;
+        /* max-width: 1200px; */
+        padding-left: 4px;
+        padding-right: 4px;
+
+    }
+    .comment-box{
+        color: rgb(54, 52, 52);
+        text-transform: uppercase;
+        font-size: 18px;
+        margin-bottom: 2px;
+    }
+    .comment-input{
+        width: 100%;
+        color: black;
+        border: 1px solid black;
+        padding: 3px;
+        margin-bottom: 3px;
+        outline: none;
+    }
+    .Submit-button{
+        width: 100%;
+        cursor: pointer;
+        color: white;
+        background-color: gray;
+        border: 1px solid black;
+        padding: 12px;
+        outline: none;
+    }
+    .Submit-button :hover{
+        background-color: black;
+    }
+    .show-comments{
+        max-width: 1440px;
+        margin: auto;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        border: 1px solid black;
+        padding-left: 10px;
+    }
+    #comment{
+        margin-bottom: 3rem;
+    }
+    .comment-title{
+        text-align: center;
+    }
+    .authorName{
+        font-weight: bold;
+    }
+    .pagination{
+        max-width: max-content;
+        margin: auto;
+        color: black !important;
+        margin-bottom: 10px;
+    }
+    .page{
+        background-color: #9b9b99;
+        padding: 5px;
+    }
+    .current{
+          background-color: blue; 
+          color: white;
+    }
+</style>
+<div class="container">
+    <div class="article">
+        <a class="blog-title" href="{{ blog.url }}">{{ blog.title }}</a>
+            {% for block in section.blocks %}
+                {% case block.type %}
+                    {% when 'article_title' %}
+                        <h1 class="title">{{ article.title }}</h1>
+                    {% when 'article_author' %}
+                    {% if section.settings.author %}
+                        <small>{{ article.author }}</small>
+                    {% endif %}
+                    {% when 'article_published_date' %}
+                    {% if section.settings.published_at %}
+                        <small>{{ article.published_at | date:"%Y-%m-%d"  }}</small>
+                    {% endif %}
+                    {% when 'featured_image' %}
+                        <div>
+                            <img class="article-image" src="{{ article.image |  img_url: 'large' }}" alt="">
+                        </div>
+                    {% when 'article_content' %}
+                        <p>{{ article.content }}</p>
+                {% endcase %}
+            {% endfor %}
+
+    </div>
+
+</div>
+
+
+
+{% if blog.comments_enabled? %}
+    <div id="comment">
+        {% if article.comments_count > 0 %}
+            {% if form.errors %}
+                something went wrong
+                {% elsif form.posted_successfully? %}
+                    Congratss your comments has been posted
+            {% endif %}
+            <h1 class="comment-title">See what people are saying</h1>
+            {% paginate  article.comments by 3 %}
+                {% for comment in  article.comments %}
+                    <div class="show-comments">
+                        <span class="authorName">
+                            {{ comment.author }}
+                        </span>
+                        <span>{{ comment.content }}</span>
+                    </div>
+                {% endfor %}
+             <div class="pagination">
+                {{ paginate | default_pagination}}
+             </div>
+            {% endpaginate %}
+            {% else %}
+                There is no comment
+        {% endif %}
+    </div>
+    
+{% endif %}
+
+
+<div id="comment-form">
+    {% form 'new_comment', article %}
+        <div class="comment-container">
+            <div>
+                    <div>
+                        <label for="comment_author" class="comment-box">Name</label>
+                        <input 
+                            type="text" 
+                            name="comment[author]" 
+                            id="comment_author"
+                            class="comment-input"
+                            placeholder="JAne Doe"
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="comment_email" class="comment-box">Email</label>
+                        <input 
+                            type="text" 
+                            name="comment[email]" 
+                            id="comment_email"
+                            class="comment-input"
+                            placeholder="JaneDoe@gmail.com"
+                            required
+                        >
+                    </div>
+            </div>
+            <div>
+                <div>
+                    <label for="comment_content" class="comment-box">Comment</label>
+                    <textarea 
+                        name="comment[body]" 
+                        id="comment_content"
+                        class="comment-input"
+                    ></textarea>
+                </div>
+            </div>
+            <div>
+                <div>
+                  <input type="submit" value="Post Comment" class="Submit-button">
+                </div>
+            </div>
+        </div>
+    {% endform %}
+</div>
+
+
+
+{% schema %}
+    {
+        "name": "Article",
+        "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "author",
+                    "label": "Name of the author",
+                    "default": true
+                },
+                {
+                    "type": "checkbox",
+                    "id": "published_at",
+                    "label": "Date Published",
+                    "default": true
+                }
+            ],
+            "blocks" : [
+            
+            {
+                "type": "article_title",
+                "name":"Title",
+                "limit": 1
+            },
+            {
+                "type": "article_author",
+                "name":"Author",
+                "limit": 1
+            },
+            {
+                "type": "article_published_date",
+                "name":"Published Date",
+                "limit": 1
+            },
+            {
+                "type": "featured_image",
+                "name":"Thumbnail",
+                "limit": 1
+            },
+            {
+                "type": "article_content",
+                "name":"Content",
+                "limit": 1
+            }
+
+            
+
+            ]
+    }
+{% endschema %}

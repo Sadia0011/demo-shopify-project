@@ -1,0 +1,51 @@
+
+<style>
+    .container{
+        max-width: 1440px;
+        margin: auto;
+    }
+    .collection-Container{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 20px;
+    }
+    .title{
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .pagination{
+        max-width: max-content;
+        margin: auto;
+        color: black !important;
+        margin-bottom: 10px;
+        margin-top: 30px;
+    }
+    .page{
+        background-color: #9b9b99;
+        padding: 5px;
+    }
+    .current{
+          background-color: blue; 
+          color: white;
+    }
+</style>
+
+<div class="container">
+    <h1 class="title">{{ collection.title }}</h1>
+    <div class="collection-Container">
+        {% paginate collection.products by 6 %}
+                {% for product in collection.products %}
+                {% render "product-card", product: product %}
+                {% else %}
+                <p>no matches</p>
+                {% endfor %}
+    </div>
+            {% if paginate.pages > 1 %}
+                <div class="pagination">
+                {{ paginate | default_pagination}}
+             </div>
+            {% endif %}
+        {% endpaginate %}
+    
+</div>
