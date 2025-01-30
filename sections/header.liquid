@@ -116,12 +116,21 @@
     .cart-item{
         padding: 10px;
         border: 1px solid black;
+        margin-bottom: 10px;
+        box-shadow: 10px gray;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
     }
     .cart-item-image{
         width: 100px;
         height: 100px;
         object-fit: cover;
         border: 1px solid black;
+    }
+    .cart-item-description{
+        display:flex ;
+        flex-direction: column;
     }
 </style>
 
@@ -156,7 +165,7 @@
            {% render "icon-cart" %} 
         </a> {% endcomment %}
 
-        <span x-on:click=" cartDrawerOpen = !cartDrawerOpen" class="shopping-cart">  {% render "icon-cart" %} </span>
+        <span x-on:click=" cartDrawerOpen = !cartDrawerOpen " class="shopping-cart">  {% render "icon-cart" %} </span>
         <div class="cartDrawerOpen" x-show="cartDrawerOpen">
           <div class="cart-header">
             <h1>Your Cart</h1>
@@ -166,20 +175,25 @@
           
                {% for item in cart.items %}
 
-                <div class="cart-items-container">      
+                <div class="cart-items-container">  
+                    <a href="{{ item.url }}"></a>    
                        <div class="cart-item">
-                            <a href="{{ item.url }}">
+                            <div>
                                 {% if item.image %}
                                     <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}" class="cart-item-image">
                                 {% else %}
                                     {{ 'product-1' | placeholder_svg_tag: 'cart-item-image' }}
                                 {% endif %}
-                                <a href="{{ item.url }}" class="my-1">{{ item.product.title | truncatewords: 5}}</a>
-                                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" class="text-sm font-medium text-red-500 my-1">remove</a>
+                            </div>
+                            <div class="cart-item-description">
+                                <a href="{{ item.url }}">{{ item.product.title | truncatewords: 5}}</a>
+                                <span>{{ item.variant.title }}</span>
+                                <input type="number" name="updates[]" id="updates_{{ forloop.index }}" value="{{ item.quantity }}" min="0">
+                                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">{% render "icon-delete" %}</a>
                                 {{ item.line_price | money }}
-                            </a>
+                            </div>
                        </div>
-                       
+                    </a>
                        
                 </div>
                 
