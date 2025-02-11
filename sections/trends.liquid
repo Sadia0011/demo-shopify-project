@@ -1,0 +1,197 @@
+<style>
+    .container {
+        max-width: 1440px;
+        margin: auto;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .trendContainer {
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        gap: 4rem;
+    }
+    .image-container {
+        position: relative;
+        width: 50%;
+    }
+    .image-container img {
+        width: 660px;
+        height: 650px;
+        object-fit: cover;
+        display: block;
+    }
+    .information {
+        flex: 1;
+        text-align: left;
+        height: 100%;
+        /* max-width: 300px; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 50px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .subtitle {
+        text-transform: uppercase;
+        font-size: 16px;
+        font-weight: 400;
+        color: gray;
+        margin-bottom: 16px;
+        margin-bottom: 0;
+    }
+    .title {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        margin-top: 0;
+        line-height: 43px;
+        overflow-wrap: break-word;
+        text-transform: uppercase;
+    }
+    .paragraph {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+    .collections {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+    .collections img {
+        width: 130px;
+        height: 130px;
+        object-fit: cover;
+        border-radius: 4px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .collections a {
+        text-decoration: none;
+        color: black;       
+    }
+    .collections a:hover {
+        text-decoration: underline;  
+    }
+    @media screen and (max-width: 1024px) {
+        .trendContainer {
+            flex-direction: column;
+            text-align: center;
+        }
+        .image-container {
+            width: 100%;
+        }
+        .collections {
+            justify-content: center;
+        }
+        .information{
+            max-width: 100%;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media screen and (max-width: 512px) {
+        .trendContainer {
+            flex-direction: column;
+            text-align: center;
+        }
+        .image-container {
+            width: 100%;
+        }
+        .collections {
+            justify-content: center;
+        }
+        .information{
+            padding: 0;
+            margin: 0;
+        }
+        .collections img {
+            width: 100px;
+            height: 100px;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="trendContainer">
+        {% if section.settings.image %}
+        <div class="image-container">
+            <img src="{{ section.settings.image | img_url: 'medium' }}" alt="Trend Image">
+        </div>
+        {% endif %}
+
+        <div class="information">
+            <p class="subtitle">{{ section.settings.subtitle }}</p>
+            <h2 class="title">{{ section.settings.title }}</h2>
+            <p class="paragraph">{{ section.settings.paragraph }}</p>
+            
+            <div class="collections">
+                {% if section.settings.collection1.image %}
+                <a href="{{ section.settings.collection1.url }}">
+                    <img src="{{ section.settings.collection1.image.src | img_url: 'medium' }}" alt="{{ section.settings.collection1.title }}">
+                    <p>{{ section.settings.collection1.title }}</p>
+                </a>
+                {% endif %}
+                
+                {% if section.settings.collection2.image %}
+                    <a href="{{ section.settings.collection2.url }}">
+                       <img src="{{ section.settings.collection2.image.src | img_url: 'medium' }}" alt="{{ section.settings.collection2.title }}">
+                       <p>{{ section.settings.collection2.title }}</p>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Trends Section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Main Image"
+        },
+        {
+            "type": "inline_richtext",
+            "id": "subtitle",
+            "label": "Subtitle",
+            "default": "Trends & Tradition"
+        },
+        {
+            "type": "inline_richtext",
+            "id": "title",
+            "label": "Title",
+            "default": "For Everyday Wear"
+        },
+        {
+            "type": "inline_richtext",
+            "id": "paragraph",
+            "label": "Paragraph",
+            "default": "From dainty classics that are perfect for daily adornment to chic, trendsetting pieces designed to complement any occasion."
+        },
+        {
+            "type": "collection",
+            "id": "collection1",
+            "label": "First Collection"
+        },
+        {
+            "type": "collection",
+            "id": "collection2",
+            "label": "Second Collection"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Trends"
+        }
+    ]
+}
+{% endschema %}

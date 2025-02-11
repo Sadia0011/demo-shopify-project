@@ -78,20 +78,23 @@
         text-align: center;
     }
     .authorName{
-        font-weight: bold;
+        font-weight: 600;
     }
     .pagination{
         max-width: max-content;
         margin: auto;
-        color: black !important;
         margin-bottom: 10px;
     }
-    .page{
-        background-color: #9b9b99;
-        padding: 5px;
+    .page, .next, .prev{
+        border: 1px solid  #493628 ;
+        padding: 10px 20px;
+    }
+    .page a , .next a, .prev a{
+        text-decoration: none;
+        color: black;
     }
     .current{
-          background-color: blue; 
+          background-color:  #493628; 
           color: white;
     }
 </style>

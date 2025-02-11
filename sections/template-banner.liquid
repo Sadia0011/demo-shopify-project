@@ -20,8 +20,9 @@
             text-align: center;
             color: #ffffff;
             position: absolute;
-            top: 50%;
-            right: 34%;
+            top: 53%;
+            left: 8%;
+            z-index: 10;
         }
         .banner-text{
             font-size: 40px;
@@ -49,45 +50,45 @@
   <div class="swiper-wrapper">
     
     <div class="swiper-slide slide-hero"
-    style=" 
-     background-image: url({% if section.settings.img %}'{{ section.settings.img | img_url: 'large' }}'{% else %}'{{ 'image' | placeholder_svg_tag: 'w-20' }}'{% endif %});
-     background-size: cover; 
-     background-position: center; 
-     background-repeat: no-repeat;">
-        <div class="banner-description">
-            <h2 class="banner-text">{{ section.settings.text }}</h2>
-            {% if  section.settings.button  %}
-                <a class="banner-button" href="{{ routes.all_products_collection_url }}" >Continue Shopping</a>
-            {% endif %}
-        </div>
+        style=" 
+        background-image: url({% if section.settings.img %}'{{ section.settings.img | img_url: 'large' }}'{% else %}'{{ 'image' | placeholder_svg_tag: 'w-20' }}'{% endif %});
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat;">
+            <div class="banner-description">
+                <h2 class="banner-text">{{ section.settings.text }}</h2>
+                {% if  section.settings.button  %}
+                    <a class="banner-button" href="{{ routes.all_products_collection_url }}" >Continue Shopping</a>
+                {% endif %}
+            </div>
 
     </div>
     <div class="swiper-slide slide-hero"
-    style=" 
-     background-image: url({% if section.settings.img2 %}'{{ section.settings.img2 | img_url: 'large' }}'{% else %}'{{ 'image' | placeholder_svg_tag: 'w-20' }}'{% endif %});
-     background-size: cover; 
-     background-position: center; 
-     background-repeat: no-repeat;">
-        <div class="banner-description">
-            <h2 class="banner-text">{{ section.settings.text2 }}</h2>
-            {% if  section.settings.button  %}
-                <a class="banner-button" href="{{ routes.all_products_collection_url }}" >Continue Shopping</a>
-            {% endif %}
-        </div>
+        style=" 
+        background-image: url({% if section.settings.img2 %}'{{ section.settings.img2 | img_url: 'large' }}'{% else %}'{{ 'image' | placeholder_svg_tag: 'w-20' }}'{% endif %});
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat;">
+            <div class="banner-description">
+                <h2 class="banner-text">{{ section.settings.text2 }}</h2>
+                {% if  section.settings.button  %}
+                    <a class="banner-button" href="{{ routes.all_products_collection_url }}" >Continue Shopping</a>
+                {% endif %}
+            </div>
 
     </div>
     <div class="swiper-slide slide-hero"
-    style=" 
-     background-image: url({% if section.settings.img3 %}'{{ section.settings.img3 | img_url: 'large' }}'{% else %}'{{ 'image' | placeholder_svg_tag: 'w-20' }}'{% endif %});
-     background-size: cover; 
-     background-position: center; 
-     background-repeat: no-repeat;">
-        <div class="banner-description">
-            <h2 class="banner-text">{{ section.settings.text3 }}</h2>
-            {% if  section.settings.button  %}
-                <a class="banner-button" href="{{ routes.all_products_collection_url }}" >Continue Shopping</a>
-            {% endif %}
-        </div>
+        style=" 
+        background-image: url({% if section.settings.img3 %}'{{ section.settings.img3 | img_url: 'large' }}'{% else %}'{{ 'image' | placeholder_svg_tag: 'w-20' }}'{% endif %});
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat;">
+            <div class="banner-description">
+                <h2 class="banner-text">{{ section.settings.text3 }}</h2>
+                {% if  section.settings.button  %}
+                    <a class="banner-button" href="{{ routes.all_products_collection_url }}" >Continue Shopping</a>
+                {% endif %}
+            </div>
 
     </div>
    

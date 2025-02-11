@@ -1,0 +1,50 @@
+
+<style>
+    .container{
+        max-width: 1440px;
+        margin: auto;
+    }
+    .title{
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+    }
+    .product-container{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 20px;
+        margin-top: 3rem;
+
+    }
+    @media screen and (max-width: 768px) {
+        .product-container {
+            grid-template-columns: repeat(1, 1fr);
+            justify-items: center;
+            align-items: center;
+        } 
+    }
+</style>
+
+
+<div class="container">
+    {% paginate search.results by 10 %}
+        <form action="/search" method="get" role="search">
+          <input type="search" name="q" value="{{ search.terms | escape }}">
+          <button type="submit">search</button>
+        </form>
+      
+        {% if search.performed %}
+            <h1 class="title">See the results</h1>
+            <div class="product-container">
+                {% for item in search.results %}
+                    {% render "product-card",product:item %}
+                {% else %}
+                    no results
+                {% endfor %}
+            </div>
+        {% endif %}
+      
+        {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
+      {% endpaginate %}
+</div>
+  

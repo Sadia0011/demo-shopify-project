@@ -1,0 +1,102 @@
+<div class="marquee">
+  <div class="marquee-content">
+    {%- for block in section.blocks -%}
+      <div class="hura-message">{{ block.settings.message }}</div>
+    {%- endfor -%}
+    {%- for block in section.blocks -%}  
+      <div class="hura-message">{{ block.settings.message }}</div>
+    {%- endfor -%}
+  </div>
+</div>
+
+<style>
+  .marquee {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    user-select: none;
+    background-color: #ded3d1;
+    white-space: nowrap;
+  }
+
+  .marquee-content {
+    display: flex;
+    min-width: 200%;
+    animation: scroll linear infinite;
+  }
+
+  .hura-message {
+    font-size: 2rem;
+    padding: 10px 20px;
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .marquee-content {
+    animation-duration: var(--marquee-speed, 10s); /* Default speed */
+  }
+
+  .marquee:hover .marquee-content {
+    animation-play-state: paused;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let speed = "{{ section.settings.speed }}" || 10;
+    document.documentElement.style.setProperty("--marquee-speed", speed + "s");
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Hura Marquee",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_marquee_bar",
+      "label": "Show",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "speed",
+      "label": "Speed (Seconds)",
+      "default": "10"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "header",
+      "name": "Message",
+      "settings": [
+        {
+          "id": "message",
+          "type": "textarea",
+          "label": "Message"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hura Marquee"
+    }
+  ]
+}
+{% endschema %}
