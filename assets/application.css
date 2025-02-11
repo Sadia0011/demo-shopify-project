@@ -1,7 +1,14 @@
-body {
-    background-color: rgb(251, 251, 232);
-}
 
+/* 
+body {
+    background-color: #E4E0E1;
+} */
+body {
+    background-color: #ffffff;
+}
+/* button{
+    background-color: #493628;
+} */
 .homepage {
     text-align: center;
     padding-top: 10em;
@@ -9,4 +16,47 @@ body {
 
 .logo {
     width: 25%;
+}
+
+
+/* Accordion CSS */
+.accordion {
+    margin: 1rem 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #e5e5e5;
+}
+.accordion-item {
+    border-bottom: 1px solid #e5e5e5;
+  list-style: none !important; 
+}
+/* Thumb */
+.accordion-thumb {
+    margin: 0;
+    padding: 0.8rem 0;
+    cursor: pointer;
+    font-weight: normal;
+}
+.accordion-thumb::before {
+    content: '';
+    display: inline-block;
+    height: 7px;
+    width: 7px;
+    margin-right: 1rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease-out;
+}
+/* Panel */
+.accordion-panel {
+    margin: 0;
+    padding: .8rem 2rem;
+    display: none;
+}
+/* Active */
+.accordion-item.is-active .accordion-thumb::before {
+    transform: rotate(45deg);
 }

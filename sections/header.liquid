@@ -5,18 +5,24 @@
         display: flex;
         align-items: center;
         justify-content: space-around;
-        padding: 0 20px;
+        padding: 2rem 3rem;
         box-sizing: border-box;
         font-size: 14px;
-        font-weight: bold;
+        font-weight: 600;
         position: relative;
+        background-color: #E4E0E1;
     }
 
-    .header-container h1 {
-        font-size: 18px;
+    .shopName{
+        text-decoration: none;
+        font-size: 14px;
         margin: 0;
-    }
-
+        color: #000;
+      }
+      .title-all{
+        font-size: 36px;
+        color: #493628;
+      }
     .header-container nav {
         display: flex;
         gap: 15px;
@@ -29,16 +35,20 @@
     }
 
     .header-container nav a:hover {
-        color: darkblue;
+        color:  #493628;
     }
-    .shopping-cart{
+    .shopping-cart, .account-cart{
         white-space: nowrap;
         color: #000;
         text-decoration: none;
         cursor: pointer;
+        margin-right: 8px;
+    }
+    .shopping-cart{
+        position: relative;
     }
     .shopping-cart:hover{
-        color: aqua;
+        color:  #493628;
     }
     .right-nav{
         display: flex;
@@ -49,14 +59,17 @@
     .dropdown {
         display: none;
         position: absolute;
-        top: 10;
-        left: 0;
-        border: #000;
+        top: 2rem;
+        right: 0px;
+        border: 1px solid black;
         padding: 10px 0;
         z-index: 10;
-        background-color: antiquewhite;
+        background-color: #E4E0E1;
+        border-radius: 16px;
     }
-
+    .dropdown:hover{
+        display: block;
+    }
     .dropdown a {
         display: block;
         padding: 5px 15px;
@@ -68,7 +81,9 @@
     .dropdown a:hover {
         color: #f0f0f0;
     }
-
+    .nav-item{
+        padding: 2rem 4px;
+    }
     .nav-item:hover .dropdown {
         display: block;
     }
@@ -132,20 +147,135 @@
         display:flex ;
         flex-direction: column;
     }
+    .button,.view-cart{
+        width: 100%;
+        padding: 10px;
+        border: 1px solid gray;
+        color: gray;
+        margin-top: 5px;
+    }
+    .button :hover{
+        background-color: gray;
+        color: rgb(255, 255, 255);
+    }
+    .view-cart{
+        text-decoration: none;
+    }
+    .hamburger-nav{
+        display: none;
+        position: relative;
+        align-items: center;
+        justify-items: center;
+        gap: 1rem;
+    }
+    .hamburger-dropdown{
+        display: none;
+        position: absolute;
+        top: 2rem;
+        right: 0px;
+        padding: 16px;
+        z-index: 10;
+        background-color: #E4E0E1;
+        border: 1px solid black;
+        border-radius: 16px;
+    }
+    .hamburger-dropdown .nav-item a {
+        text-decoration: none;
+        color: black;
+     }
+     .hamburger-dropdown .nav-item {
+        border-bottom: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+    .searchBar{
+        display: none;
+        width: 100%;
+        position: absolute;
+        top: 3rem;
+        left: 0;
+        background-color: #f0f0f0;
+        z-index: 10;
+    }
+    .search-close{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .searchContainer{
+        height: max-content;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        z-index: 100;
+    }
+    .search-form{
+        flex: auto;
+    }
+    .search-div{
+        position: relative;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .search-input{
+        background-color: #f0f0f0;
+        height: 20px;
+        padding: 10px;
+        border-radius: 16px;
+        font-size: small;
+        outline: none;
+    }
+    .shopping-cart-count{
+        border-radius: 50%;
+        padding: 5px;
+        font-size: 8px;
+        background: #493628;
+        color: #fff;
+        display: inline-flex;
+        font-size: 10px;
+        justify-content: center;
+        padding: 4px;
+        position: absolute;
+        right: -14px;
+        top: -14px;
+        width: 16px;
+    }
+    .block{
+        display: block;
+    }
+    .empty{
+        display: none;
+    }
+    .hamburgur-menu-icon{
+        cursor: pointer;
+    }
+    .hambuger-shopping-cart{
+        display: none;
+    }
+    @media screen and (max-width: 768px) {
+        .header-container nav,.right-nav {display: none;} 
+        .hamburger-nav {display: flex;} 
+        .shopping-cart-count{left: 10px;}
+        .hambuger-shopping-cart{
+        display: block;
+    }
+    }
 </style>
 
-<div class="header-container" >
+<div class="header-container"  >
     <div>
-        <h1>{{ shop.name }}</h1>
+        <a class="shopName" href="{{ shop.url }}"><span class="title-all">All</span> in One </a>
+        {% comment %} <h1>{{ shop.name }}</h1> {% endcomment %}
     </div>
-    <nav>
+    <nav class="navlink">
         {% for link in linklists.main-menu.links %}
             <div class="nav-item">
                 {% if link.links != blank %}
-                    {% assign link_handle = link.handle | replace: '-', '_' %}
-                        <div class="navigation-drop" x-data="{ {{ link_handle }}: true }">
-                            <span  x-on:click="{{ link_handle }} = !{{ link_handle }}" class="nav-dropdown" >{{ link.title }} {% render "icon-dropdown" %}</span>
-                            <div x-show="{{ link_handle }}" class="dropdown">
+                    {% comment %} {% assign link_handle = link.handle | replace: '-', '_' %} {% endcomment %}
+                        <div class="navigation-drop">
+                            <span class="nav-dropdown" >{{ link.title }} {% render "icon-dropdown" %}</span>
+                            <div class="dropdown">
                                 {% for childlink in link.links %}
                                     <a href="{{ childlink.url }}">{{ childlink.title }} </a>
                                 {% endfor %}
@@ -160,60 +290,163 @@
            
         {% endfor %}
     </nav>
-    <div x-data="{ cartDrawerOpen : false }" class="right-nav">
-        {% comment %} <a class="shopping-cart" href="{{ routes.cart_url }}">
-           {% render "icon-cart" %} 
-        </a> {% endcomment %}
-
-        <span x-on:click=" cartDrawerOpen = !cartDrawerOpen " class="shopping-cart">  {% render "icon-cart" %} </span>
-        <div class="cartDrawerOpen" x-show="cartDrawerOpen">
-          <div class="cart-header">
-            <h1>Your Cart</h1>
-            <p>{{ cart.item_count }} items  <span x-on:click=" cartDrawerOpen = false">{% render "icon-close" %}</span></p> 
-          </div>
-            {% if cart.item_count >0 %}
-          
-               {% for item in cart.items %}
-
-                <div class="cart-items-container">  
-                    <a href="{{ item.url }}"></a>    
-                       <div class="cart-item">
-                            <div>
-                                {% if item.image %}
-                                    <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}" class="cart-item-image">
-                                {% else %}
-                                    {{ 'product-1' | placeholder_svg_tag: 'cart-item-image' }}
-                                {% endif %}
-                            </div>
-                            <div class="cart-item-description">
-                                <a href="{{ item.url }}">{{ item.product.title | truncatewords: 5}}</a>
-                                <span>{{ item.variant.title }}</span>
-                                <input type="number" name="updates[]" id="updates_{{ forloop.index }}" value="{{ item.quantity }}" min="0">
-                                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">{% render "icon-delete" %}</a>
-                                {{ item.line_price | money }}
-                            </div>
-                       </div>
-                    </a>
-                       
-                </div>
-                
-               {% endfor %}
-                {% else %}
-                    Your cart is empty    
-            {% endif %}
-            <h3 class="text-xl">Subtotal: {{ cart.total_price | money }}</h3>
-            <button type="submit" name="checkout" class="w-full p-3 border border-gray-600 font-medium bg-gray-600 text-white">Checkout</button>
+    <div class="right-nav">
+        <span class="search-icon">{% render "icon-search" %}</span>
+        <div class="searchBar">
+            {% comment %} <button type="button" class="search-close">
+                {% render 'icon-close' %}
+            </button> {% endcomment %}
+            <div class="searchContainer">
+                <form action="{{ routes.search_url }}" method="get" class="search-form">
+                    <div class="search-div">
+                        <input type="search" name="q" placeholder="Search" class="search-input">
+                        <button type="submit" class="search-button">
+                            {% render 'icon-search' %}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-        {% if shop.customer_accounts_enabled %}
-            {% if customer %}
-                <a href="{{ routes.account_url }}" class="shopping-cart">account</a>
-                {{ 'Log out'  | customer_logout_link | replace: '<a', '<a class="shopping-cart"' }}
-            {% else %}
-                 {{ 'Log in ' | customer_login_link | replace: '<a', '<a class="shopping-cart"' }}
-                {{ 'Register' | customer_register_link | replace: '<a', '<a class="shopping-cart"' }}
-            {% endif %}
-        {% endif %} 
+        {% comment %} <div x-data="{ cartDrawerOpen : false }" class="right-nav"> {% endcomment %}
+            {% comment %} <a class="shopping-cart" href="{{ routes.cart_url }}">
+            {% render "icon-cart" %} 
+            </a> {% endcomment %}
+
+            {% comment %} <span id="shopping-cart" x-on:click="cartDrawerOpen = !cartDrawerOpen " class="shopping-cart">  {% render "icon-cart" %} </span> {% endcomment %}
+            <span id="shopping-cart" class="shopping-cart">  {% render "icon-cart" %} <sup class="shopping-cart-count">{{ cart.item_count }}</sup> </span>
+            {% comment %} <form action="{{ routes.cart_url }}" method="POST" novalidate>
+                <div class="cartDrawerOpen" x-show="cartDrawerOpen">
+                <div class="cart-header">
+                    <h1>Your Cart</h1>
+                    <p>{{ cart.item_count }} items  <span x-on:click=" cartDrawerOpen = false">{% render "icon-close" %}</span></p> 
+                </div>
+                    {% if cart.item_count >0 %}
+                
+                    {% for item in cart.items %}
+
+                        <div class="cart-items-container">  
+                            <a href="{{ item.url }}"></a>    
+                            <div class="cart-item">
+                                    <div>
+                                        {% if item.image %}
+                                            <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}" class="cart-item-image">
+                                        {% else %}
+                                            {{ 'product-1' | placeholder_svg_tag: 'cart-item-image' }}
+                                        {% endif %}
+                                    </div>
+                                    <div class="cart-item-description">
+                                        <a href="{{ item.url }}">{{ item.product.title | truncatewords: 5}}</a>
+                                        <span>{{ item.variant.title }}</span>
+                                        <input type="number" name="updates[]" id="updates_{{ forloop.index }}" value="{{ item.quantity }}" min="0">
+                                        <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">{% render "icon-delete" %}</a>
+                                        {{ item.line_price | money }}
+                                    </div>
+                            </div>
+                            </a>
+                            
+                        </div>
+                        
+                    {% endfor %}
+                        {% else %}
+                            Your cart is empty    
+                    {% endif %}
+                    <h3 class="text-xl">Subtotal: {{ cart.total_price | money }}</h3>
+                    <a href="{{ routes.cart_url }}" class="view-cart">View Cart</a>
+                    <button type="submit" name="update" class="button">Update</button>
+                    <button type="submit" name="checkout" class="button">Checkout</button>
+                </div>
+            </form> {% endcomment %}
+            {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+                    <a href="{{ routes.account_url }}" class="account-cart">account</a>
+                    {{ 'Log out'  | customer_logout_link | replace: '<a', '<a class="account-cart"' }}
+                {% else %}
+                    {{ 'Login ' | customer_login_link | replace: '<a', '<a class="account-cart"' }}
+                    {{ 'Register' | customer_register_link | replace: '<a', '<a class="account-cart"' }}
+                {% endif %}
+            {% endif %} 
+    </div>
+
+    <div class="hamburger-nav" >
+        <div class="hambuger-shopping-cart">
+            <span id="shopping-cart" class="shopping-cart">  {% render "icon-cart" %} <sup class="shopping-cart-count">{{ cart.item_count }}</sup> </span>
+        </div>
+        <div>
+            <span class="hamburgur-menu-icon">  {% render "icon-hamburger-menu" %}</span>
+        </div>
+       
+        {% comment %} <div class="hamburger-dropdown">
+            {% for link in linklists.main-menu.links %}
+                <div class="nav-item">
+                    {% if link.links != blank %}
+                            <div class="navigation-drop" >
+                                <span class="nav-dropdown" >{{ link.title }} {% render "icon-dropdown" %}</span>
+                                <div class="dropdown">
+                                    {% for childlink in link.links %}
+                                        <a href="{{ childlink.url }}">{{ childlink.title }} </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% else %}
+                        <a href="{{ link.url }}">{{ link.title }}</a>  
+                    {% endif %}
+    
+    
+                </div>
+               
+            {% endfor %}
+            <p id="shopping-cart" class="shopping-cart">  {% render "icon-cart" %} <sup class="shopping-cart-count">{{ cart.item_count }}</sup> </p>
+            {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+                    <a id="shopping-cart" href="{{ routes.account_url }}" class="account-cart">account</a>
+                    {{ 'Log out'  | customer_logout_link | replace: '<a', '<a class="account-cart"' }}
+                {% else %}
+                    {{ 'Login ' | customer_login_link | replace: '<a', '<a class="account-cart"' }}
+                    {{ 'Register' | customer_register_link | replace: '<a', '<a class="account-cart"' }}
+                {% endif %}
+            {% endif %} 
+       </div> {% endcomment %}
     </div>
 </div>
 
 
+<script>
+    
+    document.querySelector(".search-icon").addEventListener("click",()=>{
+        const seacrhBar=document.querySelector(".searchBar")
+        seacrhBar.classList.toggle("block")
+    })
+ 
+    const searcrhBar=document.querySelector(".searchBar")
+    const close=document.querySelector(".search-close")
+    if(searcrhBar && close){
+        close.addEventListener("click",()=>{
+            console.log("clicked close")
+            searcrhBar.classList.remove("block")
+        })
+        
+    }
+        
+    
+    // const hamburgerIcon = document.querySelector(".hamburgur-menu-icon");
+    // const dropdown = document.querySelector(".hamburger-dropdown");
+
+    // if (hamburgerIcon && dropdown) {
+    //     hamburgerIcon.addEventListener("click", () => {
+    //         console.log("clicked menu")
+    //         dropdown.classList.toggle("block");
+    //     });
+    // }
+
+    // const cartCount = document.querySelector(".shopping-cart-count");
+
+    // if (parseInt(cartCount.textContent) === 0) {
+    //     cartCount.remove(); 
+    // }
+    // else{
+    //     cartCount.add()
+    // }
+  
+// });
+
+</script>

@@ -1,0 +1,59 @@
+<style>
+    .footer-container {
+        box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        bottom: 0;
+        height: auto;
+        background-color: #E4E0E1;
+        padding: 40px 0;
+        width: 100%;
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .footer-links {
+        margin-bottom: 10px;
+    }
+
+    .footer-links a {
+        text-decoration: none;
+        color: black;
+        margin: 0 10px;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+        color: rgb(68, 48, 45);
+    }
+
+    .footer-copyright {
+        font-size: 14px;
+        color: #555;
+        margin-top: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .footer-container {
+            padding: 20px 0;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+    }
+</style>
+<div class="footer-container">
+    <div class="footer-links">
+        {% for link in linklists.main-menu.links %}
+            {% if link.url %}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="footer-copyright">
+        &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved.
+    </div>
+</div>

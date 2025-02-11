@@ -6,7 +6,7 @@
     .title{
         text-align: center;
         font-size: 36px;
-        font-weight: bold;
+        font-weight: 600;
     }
     .product-container{
         display: grid;
@@ -14,7 +14,26 @@
         gap: 20px;
 
     }
-
+    @media screen and (max-width: 1024px) {
+        .product-container {
+            grid-template-columns: repeat(2, 1fr);
+            justify-items: center;
+            align-items: center;
+        } 
+        .title{
+        font-size: 24px;
+        }
+    }
+    @media screen and (max-width: 512px) {
+        .product-container {
+            grid-template-columns: repeat(1, 1fr);
+            justify-items: center;
+            align-items: center;
+        } 
+        .title{
+        font-size: 24px;
+        }
+    }
 </style>
 
 <div class="container">
@@ -36,7 +55,7 @@
                 "type": "inline_richtext",
                 "id":"text",
                 "label":"Headline",
-                "default": "Featured Collection"
+                "default": "Featured Products"
             },
             {
                 "type": "collection",

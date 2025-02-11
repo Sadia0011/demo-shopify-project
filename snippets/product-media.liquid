@@ -6,7 +6,12 @@
     }
     .video{
         width: 100%;
-        height: 80px;
+        height: 400px;
+        object-fit: cover;
+    }
+    .video2{
+        width: 100%;
+        height: 100%;
         object-fit: cover;
     }
 </style>
@@ -17,7 +22,7 @@
     {% when 'external_video' %}
         {{ media | external_video_tag: class: 'video' }}
     {% when 'video' %}
-        {{ media | video_tag: controls: true, class: 'video' }}
+        {{ media | video_tag: controls: true, class: 'video2' }}
     {% when 'model' %}
       {{ model |  model_viewer_tag }}
     {% else %}

@@ -1,0 +1,81 @@
+<style>
+    .container{
+        max-width: 1440px;
+        margin: auto;
+    }    
+    .form-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 8px;
+    }
+    .form-header{
+        display: flex;
+        gap: 10px;
+    }
+    .form-name,.form-email{
+        width: 50%;
+        margin-bottom: 10px;
+       
+    }
+    .label{
+        text-transform: uppercase;
+        font-size: medium;
+        font-weight: 600;
+        margin-right: 10px;
+    }
+    .input{
+        border: 1px solid black;
+        padding: 3px;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .button{
+        display: block;
+        width: 100%;
+        font-weight: 500;
+        background-color: #212529;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 6px;
+    }
+</style>
+
+<div class="container">
+    <div class="form-container">
+         {% form 'contact', product %}
+            {% if form.errors %}
+                something went wrong
+                {% elsif form.posted_successfully? %}
+                    Congratss your message has been sent
+            {% endif %}
+            <div class="form-header">
+                 <div class="form-name">
+                    <label class="label" for="contact_name">Name</label>
+                    <input class="input" type="text" name="contact[name]" id="contact_name">
+                 </div>
+                 <div class="form-email">
+                    <label class="label" for="contact_email">Email</label>
+                    <input class="input" type="text" name="contact[email]" id="contact_email">
+                 </div>
+            </div>
+               
+               <label class="label" for="contact_message">Message</label>
+               <textarea class="input" name="contact[body]" id="contact_message"></textarea>
+
+               <input class="button" type="submit" value="Submit">
+         {% endform %}
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "Contact-From",
+    "presets": [
+            {
+                "name": "Contact-From"
+            }
+        ]
+}
+{% endschema %}
