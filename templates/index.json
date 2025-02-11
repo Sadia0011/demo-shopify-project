@@ -9,26 +9,6 @@
  */
 {
   "sections": {
-    "template_banner_H8gqy3": {
-      "type": "template-banner",
-      "settings": {
-        "img": "shopify://shop_images/pexels-ron-lach-8307686.jpg",
-        "text": "Welcome to our shop",
-        "img2": "shopify://shop_images/pexels-cottonbro-10435974.jpg",
-        "text2": "Welcome to our shop",
-        "img3": "shopify://shop_images/pexels-maksgelatin-4412934.jpg",
-        "text3": "Welcome to our shop",
-        "button": true
-      }
-    },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "text": "Featured Collection",
-        "featured_collection": "all",
-        "range": 4
-      }
-    },
     "text_merquee_4UVPbd": {
       "type": "text-merquee",
       "blocks": {
@@ -54,11 +34,49 @@
         "speed": "10",
         "pause_on_hover": true
       }
+    },
+    "template_banner_H8gqy3": {
+      "type": "template-banner",
+      "disabled": true,
+      "settings": {
+        "img": "shopify://shop_images/pexels-ron-lach-8307686.jpg",
+        "text": "Welcome to our shop",
+        "img2": "shopify://shop_images/pexels-cottonbro-10435974.jpg",
+        "text2": "Welcome to our shop",
+        "img3": "shopify://shop_images/pexels-maksgelatin-4412934.jpg",
+        "text3": "Welcome to our shop",
+        "button": true
+      }
+    },
+    "collection_banner_KaAm4d": {
+      "type": "collection-banner",
+      "settings": {}
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "text": "Featured Collection",
+        "featured_collection": "all",
+        "range": 4
+      }
+    },
+    "trends_VPrPec": {
+      "type": "trends",
+      "settings": {
+        "image": "shopify://shop_images/young-man-in-bright-fashion_925x_adeb9376-afc0-4427-9ec3-c3434e82acb2_1.webp",
+        "subtitle": "Trends & Tradition",
+        "title": "For Everyday Wear",
+        "paragraph": "From dainty classics that are perfect for daily adornment to chic, trendsetting pieces designed to complement any occasion.",
+        "collection1": "frontpage",
+        "collection2": "watch-collection"
+      }
     }
   },
   "order": [
+    "text_merquee_4UVPbd",
     "template_banner_H8gqy3",
+    "collection_banner_KaAm4d",
     "featured-collection",
-    "text_merquee_4UVPbd"
+    "trends_VPrPec"
   ]
 }
