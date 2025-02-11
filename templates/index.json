@@ -37,10 +37,17 @@
           "settings": {
             "message": "Save 50%"
           }
+        },
+        "header_UzhH8C": {
+          "type": "header",
+          "settings": {
+            "message": "Get discount on all products."
+          }
         }
       },
       "block_order": [
-        "header_FwmTDV"
+        "header_FwmTDV",
+        "header_UzhH8C"
       ],
       "settings": {
         "show_marquee_bar": true,
