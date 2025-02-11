@@ -28,10 +28,30 @@
         "featured_collection": "all",
         "range": 4
       }
+    },
+    "text_merquee_4UVPbd": {
+      "type": "text-merquee",
+      "blocks": {
+        "header_FwmTDV": {
+          "type": "header",
+          "settings": {
+            "message": "Save 50%"
+          }
+        }
+      },
+      "block_order": [
+        "header_FwmTDV"
+      ],
+      "settings": {
+        "show_marquee_bar": true,
+        "speed": "10",
+        "pause_on_hover": true
+      }
     }
   },
   "order": [
     "template_banner_H8gqy3",
-    "featured-collection"
+    "featured-collection",
+    "text_merquee_4UVPbd"
   ]
 }
