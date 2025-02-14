@@ -91,13 +91,15 @@
         <div class="article-Container">
            {% for article in blog.articles %}
                 <div class="article">
-                    {% if section.settings.article_image %}
-                        {% if article.image !=blank %}
-                            <img class="article-image" src="{{ article.image |  img_url: "medium"  }}" alt="{{ article.image.alt }}">
-                            {% else %}
-                                {{ 'image'|  placeholder_svg_tag }}
-                        {% endif %}
-                       {% endif %}
+                    <a href="{{ article.url }}">
+                        {% if section.settings.article_image %}
+                            {% if article.image !=blank %}
+                                <img class="article-image" src="{{ article.image |  img_url: "medium"  }}" alt="{{ article.image.alt }}">
+                                {% else %}
+                                    {{ 'image'|  placeholder_svg_tag }}
+                            {% endif %}
+                           {% endif %}
+                    </a>
                     <div class="article-description">
                         <h1 class="article-title">{{ article.title }}</h1>
             
