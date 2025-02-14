@@ -1,0 +1,114 @@
+<style>
+    .activate-account-container{
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        padding: 12px 4px;
+    }
+    .activate-account{
+        max-width: 400px;
+        width: 100%;
+
+    }
+    .activate-account-title{
+        margin-top: 24px;
+        text-align: center;
+        font-size: 4rem;
+        font-weight: bold;
+        color: rgb(44, 41, 41);
+    }
+    .activate-account-subtitle{
+        margin-top: 18px;
+        text-align: center;
+    }
+    .alert {
+        position: relative;
+        border: 1px solid #f56565; 
+        background-color: #fed7d7; 
+        color: #c53030; 
+        padding: 12px 16px;
+        font-weight: bold;
+    }
+
+    .error {
+        display: block;
+    }
+    .input {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding: 8px 12px; 
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .button-container{
+        display: block;
+    }
+    .button {
+        position: relative;
+        width: 100%;
+        padding: 8px 16px; 
+        font-size: 0.875rem; 
+        font-weight: 500;
+        color: #fff;
+        background-color: #4b5563; 
+        border: none;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #111827; 
+    }
+    @media screen and(max-width:768) {
+        .button-container{
+        display: flex;
+    }
+    }
+</style>
+
+
+<div class="activate-account-container">
+    <div class="activate-account">
+        <div>
+            <h1 class="activate-account-title">Activate account</h1>
+            <p class="activate-account-subtitle">Create your password to activate your account</p>
+        </div>
+        <div>
+            {% form 'activate_customer_password', id: 'activate_account_form' %}
+                {% if form.errors %}
+                    <div class="alert" role="alert">
+                        <strong>Error!</strong>
+                        <span class="error">
+                            {{ form.errors | default_errors }}
+                        </span>
+                    </div>
+                {% endif %}
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" 
+                        name="customer[password]" 
+                        id="password"
+                        placeholder="New password"
+                        class="input"
+                        autocomplete="new-password"
+                        >
+                </div>
+                <div>
+                    <label for="confirm_password">Confirm password</label>
+                    <input type="password" 
+                        name="customer[password_confirmation]" 
+                        id="confirm_password"
+                        placeholder="Confirm your password"
+                        class="input"
+                        autocomplete="new-password"
+                        >
+                </div>
+                <div class="button-container">
+                    <button type="submit" class="button">Activate account</button>
+                    <button type="submit" name="decline" class="button">Decline invitation</button>
+                </div>
+            {% endform %}
+        </div>
+    </div>
+</div>
