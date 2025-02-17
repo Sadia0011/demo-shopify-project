@@ -29,9 +29,7 @@
         "header_FwmTDV",
         "header_UzhH8C"
       ],
-      "custom_css": [
-        ".hura-messages {background-color: #493628; color: white;}"
-      ],
+      "custom_css": [],
       "settings": {
         "show_marquee_bar": true,
         "direction": "right",
