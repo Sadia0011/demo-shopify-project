@@ -12,9 +12,16 @@
     "template": {
       "type": "template-page",
       "settings": {}
+    },
+    "contact_form_6DDWeP": {
+      "type": "contact-form",
+      "settings": {
+        "title": "Have Questions?"
+      }
     }
   },
   "order": [
-    "template"
+    "template",
+    "contact_form_6DDWeP"
   ]
 }
