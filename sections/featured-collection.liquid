@@ -1,12 +1,14 @@
 <style>
-    .container{
+    /* .featured-container{
         max-width: 1440px;
         margin: auto;
-    }
-    .title{
+        margin-top: 100px;
+    } */
+    .featured-title{
         text-align: center;
         font-size: 36px;
         font-weight: 600;
+        margin-bottom: 3rem;
     }
     .product-container{
         display: grid;
@@ -20,7 +22,7 @@
             justify-items: center;
             align-items: center;
         } 
-        .title{
+        .featured-title{
         font-size: 24px;
         }
     }
@@ -30,14 +32,14 @@
             justify-items: center;
             align-items: center;
         } 
-        .title{
+        .featured-title{
         font-size: 24px;
         }
     }
 </style>
 
 <div class="container">
-    <h1 class="title">{{  section.settings.text }}</h1>
+    <h1 class="featured-title">{{  section.settings.text }}</h1>
     <div class="product-container">
         {% for product in  section.settings.featured_collection.products limit: section.settings.range  %}
               {% render 'product-card', product: product %}  

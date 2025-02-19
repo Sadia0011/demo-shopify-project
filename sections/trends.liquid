@@ -1,15 +1,13 @@
 <style>
-    .container {
-        max-width: 1440px;
-        margin: auto;
+    .trend-container {
         padding: 20px;
-        margin-top: 20px;
     }
     .trendContainer {
         display: flex;
         justify-items: center;
         align-items: center;
         gap: 4rem;
+        background-color: #E4E0E1;
     }
     .image-container {
         position: relative;
@@ -118,7 +116,7 @@
     }
 </style>
 
-<div class="container">
+<div class="container trend-container">
     <div class="trendContainer">
         {% if section.settings.image %}
         <div class="image-container">

@@ -1,51 +1,164 @@
 <style>
     .footer-container {
-        box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
-        /* position: sticky;
-        bottom: 0; */
-        height: auto;
-        background-color: #E4E0E1;
-        padding: 40px 0;
-        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f4f4f4;
+        padding: 40px 20px;
         text-align: center;
-        margin-top: 2rem;
+        box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+        border-top: 1px solid #ddd;
+        margin-top: 100px;
+    }
+
+    .footer-logo {
+        font-size: 26px;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .footer-newsletter {
+        flex: 1;
+        max-width: 350px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-newsletter p {
+        font-weight: 600;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .footer-newsletter input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        outline: none;
+        margin-bottom: 10px;
+        font-size: 1rem;
+    }
+
+    .footer-newsletter button {
+        padding: 12px 18px;
+        background-color: #E97191;
+        border: none;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.3s ease;
+        font-size: 1.1rem;
+    }
+
+    .footer-newsletter button:hover {
+        background-color: #c85a73;
     }
 
     .footer-links {
-        margin-bottom: 10px;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        width: 100%;
     }
 
     .footer-links a {
         text-decoration: none;
-        color: black;
-        margin: 0 10px;
+        color: #555;
         font-weight: 600;
         transition: color 0.3s ease;
+        font-size: 1rem;
     }
 
     .footer-links a:hover {
-        color: rgb(68, 48, 45);
+        color: #E97191;
+    }
+
+    .footer-social {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .footer-social a {
+        margin: 0 12px;
+        color: #555;
+        font-size: 24px;
+        transition: color 0.3s ease;
+    }
+
+    .footer-social a:hover {
+        color: #E97191;
     }
 
     .footer-copyright {
+        width: 100%;
+        text-align: center;
         font-size: 14px;
         color: #555;
-        margin-top: 10px;
+        margin-top: 20px;
+        font-weight: 400;
     }
 
+   
     @media screen and (max-width: 768px) {
         .footer-container {
-            padding: 20px 0;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
+
+        .footer-newsletter,
+        .footer-links,
+        .footer-social {
+            max-width: 100%;
+            margin-bottom: 15px;
+        }
+
         .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
             gap: 10px;
         }
     }
+
+    @media screen and (max-width: 480px) {
+        .footer-logo {
+            font-size: 22px;
+        }
+
+        .footer-newsletter button {
+            font-size: 1rem;
+        }
+
+        .footer-social a {
+            font-size: 20px;
+        }
+    }
 </style>
+
 <div class="footer-container">
+    <div class="footer-logo">All in One</div>
+
+    <div class="footer-newsletter">
+        <p>Subscribe to our newsletter</p>
+        <form method="post" action="{{ routes.root_url }}contact#newsletter">
+            <input type="email" name="contact[email]" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+
     <div class="footer-links">
         {% for link in linklists.main-menu.links %}
             {% if link.url %}
@@ -53,7 +166,18 @@
             {% endif %}
         {% endfor %}
     </div>
+
+    <div class="footer-social">
+        <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+        <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+        <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+        <a href="https://www.youtube.com/" target="_blank"><i class="fa fa-youtube"></i></a>
+    </div>
+
     <div class="footer-copyright">
         &copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved.
     </div>
 </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/js/all.min.js"></script>

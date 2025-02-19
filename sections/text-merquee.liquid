@@ -1,6 +1,6 @@
 <div class="hura-messages">
 
-  <marquee height="100px" width="100%" scrollamount="{{ section.settings.speed }}" direction="{{ section.settings.direction }}" {% if section.settings.pause_on_hover %}onmouseover="this.stop();" onmouseout="this.start();"{% endif %}>
+  <marquee width="100%" scrollamount="{{ section.settings.speed }}" direction="{{ section.settings.direction }}" {% if section.settings.pause_on_hover %}onmouseover="this.stop();" onmouseout="this.start();"{% endif %}>
         {%- for block in section.blocks -%}
             <div class="hura-message">{{block.settings.message}}</div>
         {%- endfor -%}
@@ -14,9 +14,6 @@
     position: relative;
     overflow: hidden;
     display: flex;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    background-color:  #ded3d1;
     }
 
     .hura-message{

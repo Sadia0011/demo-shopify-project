@@ -1,6 +1,5 @@
 <style>
 .order-container {
-    max-width: 100%;
     padding: 48px 5%;
     overflow-x: hidden;
 }
@@ -155,7 +154,7 @@
 </style>
 
 
-<div class="order-container">
+<div class="container order-container">
     <div class="order-header-container">
         <div class="order-header">
             <h1 class="order-title">Order {{ order.name }}</h1>
@@ -233,7 +232,7 @@
             <h1 class="order-subtitle">Billing address</h1>
             {{ order.billing_address | format_address }}
         </div>
-        <div>
+        <div style="padding: 20px;">
             <h1 class="order-subtitle">Payment information</h1>
             {% for transaction in order.transactions %}
                 <div class="margin-2">

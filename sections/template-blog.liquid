@@ -1,8 +1,5 @@
 <style>
-    .Blog-Container{
-       max-width: 1440px;
-       margin: auto;
-    }
+
     .blog-title{
        text-align: center;
        font-size: 36px;
@@ -84,7 +81,7 @@
     }
 </style>
 
-<div class="Blog-Container">
+<div class="container">
     <h1 class="blog-title">{{ section.settings.text }}</h1>
     
     {% paginate blog.articles by section.settings.number_of_blog_posts %}
