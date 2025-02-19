@@ -233,7 +233,6 @@
 
 <div class="cart-drawer">
   <div class="cart-drawer-box">
-    {% comment %} Header section {% endcomment %}
     <header class="cart-drawer-header">
       <h2>Your cart</h2>
 
@@ -327,10 +326,10 @@
         }
 
         function addCartDrawerListeners() {
-            // Update quantities
+          
             document.querySelectorAll(".cart-drawer-quantity-selector button").forEach((button) => {
                 button.addEventListener("click", async () => {
-                    // Get line item key
+                  
                     const rootItem =button.parentElement.parentElement.parentElement.parentElement.parentElement;
                     const key = rootItem.getAttribute("data-line-item-key");
 
@@ -339,7 +338,7 @@
                     const isUp = button.classList.contains("cart-drawer-quantity-selector-plus");
                     const newQuantity = isUp ? currentQuantity + 1 : currentQuantity - 1;
 
-                    // Ajax update\
+                   
                     const res = await fetch("/cart/update.js", {
                     method: "post",
                     headers: {
@@ -352,7 +351,7 @@
 
                     updateCartItemCounts(cart.item_count);
 
-                    // Update cart
+                   
                     updateCartDrawer();
             });
             });
@@ -371,23 +370,28 @@
 
        setTimeout(()=>{
 
-       document.querySelector("[name='add']").closest("form").addEventListener("submit",async(e)=>{
+       document.querySelectorAll("[name='add']").closest("form").forEach((cart)=>{
+           cart. addEventListener("submit",async(e)=>{
           e.preventDefault()
            let addedForm = document.querySelector("[name='add']").closest("form");
           await fetch("/cart/add", {
                 method: "post",
                 body: new FormData(addedForm),
                 });
-              // Get cart count
+              
               const res = await fetch("/cart.js");
                 const cart = await res.json();
                 updateCartItemCounts(cart.item_count);
-
-                // Update cart
+                console.log("Hello from cart drawer func ---------------")
+               
                 await updateCartDrawer();
-          openCartDrawer()
+                openCartDrawer()
       })
        },100)
+       })
+       
+       
+      
      
 
        document.querySelectorAll("#shopping-cart").forEach((cart) => {
